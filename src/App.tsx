@@ -13,15 +13,18 @@ function App() {
   const listener = async (data: any) => {
     switch (data.payload.event) {
       case "signIn":
+        setAuthenticated(true);
+        setIsAuthenticating(false);
         break;
       case "signUp":
         break;
       case "signOut":
-        setAuthenticated && setAuthenticated(false);
-        setIsAuthenticating && setIsAuthenticating(false);
+        setAuthenticated(false);
+        setIsAuthenticating(false);
         break;
       case "signIn_failure":
-        console.log("user sign in failed");
+        setAuthenticated(false);
+        setIsAuthenticating(false);
         break;
       case "tokenRefresh":
         const session = await Auth.currentSession();
