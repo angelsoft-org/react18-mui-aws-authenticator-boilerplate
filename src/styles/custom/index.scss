@@ -1,0 +1,11 @@
+@import "./react-toasify/main.scss";
+
+.rich-text-viewer {
+  .ql-container {
+    border: 0 !important;
+
+    .ql-editor {
+      padding: 0.5rem;
+    }
+  }
+}

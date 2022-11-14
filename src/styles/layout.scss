@@ -1,0 +1,57 @@
+.main-content-wrapper {
+  position: relative;
+  padding: 2rem;
+}
+
+$breakpoint-mobile: 430px;
+
+@media (max-width: $breakpoint-mobile) {
+  .main-content-wrapper {
+    padding: 2rem 1rem !important;
+  }
+  .class-card-container {
+    min-width: 100% !important;
+  }
+}
+// .profile-menu {
+//   position: absolute;
+//   top: 15px;
+//   left: 15px;
+//   z-index: 10;
+// }
+
+// .source-info {
+//   position: absolute;
+//   top: 15px;
+//   right: 15px;
+//   z-index: 10;
+// }
+
+// .video-player-container {
+//   flex: 1;
+//   position: relative;
+// }
+
+// .video-player-wrapper {
+//   position: absolute;
+//   width: 100%;
+//   bottom: 0;
+//   padding: 10px;
+// }
+
+// .bottom-navigation-bar {
+//   width: 100%;
+// }
+
+// .subpage-container {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .video-actions {
+//   position: absolute;
+//   bottom: 60px;
+//   right: 10px;
+//   z-index: 10;
+// }
