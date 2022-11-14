@@ -23,8 +23,7 @@ import { useAuthContext } from "../AuthProvider";
 
 function PageSignIn() {
   const navigate = useNavigate();
-  const [{ email, password }, { setEmail, setPassword, setVerifyEmail, setAuthenticated, setIsAuthenticating }] =
-    useAuthContext();
+  const [{ email, password }, { setEmail, setPassword, setVerifyEmail }] = useAuthContext();
 
   const [isLoading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -49,14 +48,6 @@ function PageSignIn() {
         window.localStorage.setItem("LOGIN_ACTION", "1");
         setEmail("");
         setPassword("");
-        // dispatch(
-        //   signIn({
-        //     username: cognitoUser.username,
-        //     attributes: cognitoUser.attributes,
-        //   })
-        // );
-        setAuthenticated && setAuthenticated(true);
-        setIsAuthenticating && setIsAuthenticating(false);
         setLoading(false);
       })
       .catch((err) => {
@@ -71,8 +62,6 @@ function PageSignIn() {
             break;
           default:
         }
-        setAuthenticated && setAuthenticated(false);
-        setIsAuthenticating && setIsAuthenticating(false);
         setLoading(false);
       });
   };
@@ -129,7 +118,7 @@ function PageSignIn() {
                 errorMessages={["This field is required", "Email is not valid"]}
                 value={email}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setEmail && setEmail(event.target.value);
+                  setEmail(event.target.value);
                 }}
                 sx={{ mb: 2 }}
               ></TextValidator>
@@ -141,7 +130,7 @@ function PageSignIn() {
                 label="Password"
                 type={showPassword ? "text" : "password"}
                 value={password}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword && setPassword(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                 validators={["required"]}
                 errorMessages={["This field is required"]}
                 sx={{ mb: 2 }}

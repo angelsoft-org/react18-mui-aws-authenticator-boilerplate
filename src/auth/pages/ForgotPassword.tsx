@@ -47,7 +47,6 @@ function PageForgotPassword() {
         })
         .catch((e) => {
           setLoading(false);
-          console.log(e);
           switch (e.name) {
             case "UserNotFoundException":
               setErrorMessage("User not found");

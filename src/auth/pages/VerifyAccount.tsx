@@ -11,9 +11,9 @@ function PageVerifyAccount() {
 
   const [{ verifyEmail }, { setVerifyEmail }] = useAuthContext();
 
-  const form = useRef(null);
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const form = useRef<ValidatorForm>(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [verifyCode, setVerifyCode] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -44,18 +44,16 @@ function PageVerifyAccount() {
   };
 
   const resendVerifyCode = () => {
-    // if (form.current) form.current?.resetValidation();
+    if (form.current) form.current?.resetValidations();
     Auth.resendSignUp(verifyEmail as string)
-      .then((res: any) => {
+      .then((res) => {
         console.log(res);
         setLoading(false);
-        setErrorMessage(null);
-        // setSuccessMessage(
-        //   `We resent the verification code to your email ${res?.CodeDeliveryDetails?.Destination as string}.`
-        // );
+        setErrorMessage("");
+        setSuccessMessage(`We resent the verification code to your email ${res?.CodeDeliveryDetails?.Destination}.`);
       })
       .catch((e) => {
-        setSuccessMessage(null);
+        setSuccessMessage("");
         setErrorMessage(e.message);
         console.log(e.name);
         switch (e.name) {
