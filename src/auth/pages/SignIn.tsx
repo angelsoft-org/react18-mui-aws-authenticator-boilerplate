@@ -23,8 +23,7 @@ import { useAuthContext } from "../AuthProvider";
 
 function PageSignIn() {
   const navigate = useNavigate();
-  const [{ email, password }, { setEmail, setPassword, setVerifyEmail, setAuthenticated, setIsAuthenticating }] =
-    useAuthContext();
+  const [{ email, password }, { setEmail, setPassword, setVerifyEmail }] = useAuthContext();
 
   const [isLoading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
