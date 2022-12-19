@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useReducer, useContext, createContext, useMemo } from "react";
 
 type State = {
@@ -24,12 +27,12 @@ const INIT_STATE = {
 const AuthContext = createContext<[State, Actions]>([
   INIT_STATE,
   {
-    setIsAuthenticating: (value: boolean) => {},
-    setAuthenticated: (value: boolean) => {},
-    setEmail: (value: string) => {},
-    setVerifyEmail: (value: string) => {},
-    setPassword: (value: string) => {},
-    setConfirmPassword: (value: string) => {},
+    setIsAuthenticating: (_value: boolean) => {},
+    setAuthenticated: (_value: boolean) => {},
+    setEmail: (_value: string) => {},
+    setVerifyEmail: (_value: string) => {},
+    setPassword: (_value: string) => {},
+    setConfirmPassword: (_value: string) => {},
   },
 ]);
 AuthContext.displayName = "AuthContext";
@@ -62,7 +65,7 @@ const AuthContextProvider = (props: ProviderProps) => {
           state,
           { setAuthenticated, setIsAuthenticating, setEmail, setVerifyEmail, setPassword, setConfirmPassword },
         ],
-        [state]
+        [state],
       )}
     >
       {props.children}

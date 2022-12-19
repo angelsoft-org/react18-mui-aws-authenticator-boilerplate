@@ -219,6 +219,9 @@ function PageForgotPassword() {
               </Box>
             </ValidatorForm>
           </Container>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            Copyright ©2022 OpenZNet, Inc. All Rights Reserved.
+          </Typography>
         </Grid>
       </Grid>
     </div>

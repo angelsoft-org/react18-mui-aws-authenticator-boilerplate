@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import React, { useEffect } from "react";
 import { Auth, Hub } from "aws-amplify";
 import { useAuthContext } from "./AuthProvider";
@@ -18,6 +19,7 @@ type AuthenticatorProps = {
   children: React.ReactElement;
   services: {
     onSignIn?: (user: UserInfo) => void;
+    onSignOut?: () => void;
   };
   authUserTokenKey: string;
   roles: {
@@ -26,13 +28,18 @@ type AuthenticatorProps = {
   }[];
 };
 
-function Authenticator({ children, services: { onSignIn }, authUserTokenKey, roles }: AuthenticatorProps) {
+function Authenticator({ children, services: { onSignIn, onSignOut }, authUserTokenKey, roles }: AuthenticatorProps) {
   const [{ authenticated, isAuthenticating }, { setAuthenticated, setIsAuthenticating }] = useAuthContext();
 
   const listener = async (data: any) => {
+    const { data: userData } = data.payload;
+
+    let session, token;
     switch (data.payload.event) {
       case "signIn":
-        const { data: userData } = data.payload;
+        session = await Auth.currentSession();
+        token = session.getAccessToken().getJwtToken();
+        localStorage.setItem(authUserTokenKey, token);
         onSignIn &&
           onSignIn({
             id: userData.username,
@@ -47,14 +54,15 @@ function Authenticator({ children, services: { onSignIn }, authUserTokenKey, rol
       case "signOut":
         setAuthenticated(false);
         setIsAuthenticating(false);
+        onSignOut && onSignOut();
         break;
       case "signIn_failure":
         setAuthenticated(false);
         setIsAuthenticating(false);
         break;
       case "tokenRefresh":
-        const session = await Auth.currentSession();
-        const token = session.getAccessToken().getJwtToken();
+        session = await Auth.currentSession();
+        token = session.getAccessToken().getJwtToken();
         localStorage.setItem(authUserTokenKey, token);
         break;
       case "tokenRefresh_failure":
