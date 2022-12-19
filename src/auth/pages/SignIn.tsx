@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
-// import { Auth } from 'aws-amplify';
-// import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -181,6 +179,9 @@ function PageSignIn() {
               </Button>
             </ValidatorForm>
           </Container>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            Copyright ©2022 OpenZNet, Inc. All Rights Reserved.
+          </Typography>
         </Grid>
       </Grid>
     </div>

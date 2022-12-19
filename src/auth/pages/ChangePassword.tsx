@@ -16,9 +16,6 @@ import {
 } from "@mui/material";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Visibility, VisibilityOff, ArrowBackIosNew as ArrowBackwardIcon } from "@mui/icons-material";
-
-// import { AUTH_USER_TOKEN_KEY } from '../../utils/constants';
-// import { signIn } from '../../store/auth.slice';
 import { useAuthContext } from "../AuthProvider";
 
 function PageChangePassword() {
@@ -41,16 +38,12 @@ function PageChangePassword() {
     setLoading(true);
     Auth.signIn(email as string, password as string)
       .then((user) => {
-        Auth.completeNewPassword(user, form.newPassword, {
-          email: email,
-        })
-          .then((cognitoUser) => {
-            if (!cognitoUser.signInUserSession) {
-              setPassword("");
-              navigate("/");
-            }
+        Auth.completeNewPassword(user, form.newPassword)
+          .then(() => {
+            setPassword("");
+            navigate("/");
           })
-          .catch((err) => {
+          .catch(() => {
             setForm({
               newPassword: "",
               confirmPassword: "",
@@ -61,7 +54,7 @@ function PageChangePassword() {
             setLoading(false);
           });
       })
-      .catch((err) => {
+      .catch(() => {
         setPassword("");
         navigate("/");
       });
@@ -198,6 +191,9 @@ function PageChangePassword() {
               </Button>
             </ValidatorForm>
           </Container>
+          <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+            Copyright ©2022 OpenZNet, Inc. All Rights Reserved.
+          </Typography>
         </Grid>
       </Grid>
     </div>
